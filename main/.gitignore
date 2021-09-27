@@ -1,0 +1,7 @@
+/dependency-reduced-pom.xml
+/logs
+/nbactions.xml
+/nb-configuration.xml
+/src/main/resources/apidoc/swagger.json
+/src/main/resources/apidoc/swagger.yaml
+/target

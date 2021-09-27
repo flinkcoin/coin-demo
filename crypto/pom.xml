@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+   
+    <parent>
+        <groupId>com.flick</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.0.0</version>
+    </parent>
+   
+    <artifactId>crypto</artifactId>
+    <version>0.0.0</version>
+    <packaging>jar</packaging>
+    
+    <name>Flink - Crypto</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.flick</groupId>
+            <artifactId>helper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.i2p.crypto</groupId>
+            <artifactId>eddsa</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+        </dependency>
+    </dependencies>
+</project>

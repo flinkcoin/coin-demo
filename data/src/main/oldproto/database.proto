@@ -1,0 +1,162 @@
+syntax = "proto3";
+
+package com.flick.data.proto.database;
+
+import "common.proto";
+
+option java_multiple_files = true;
+option java_package = "com.flick.data.proto.database";
+
+message Storage {
+
+    message NodePair {
+        bytes key = 1;
+        com.flick.data.proto.common.Node value = 2;
+    }
+
+
+    message NodeAddressPair {
+        bytes key = 1;
+        com.flick.data.proto.common.NodeAddress value = 2;
+    }
+
+    message NodeAddressPair {
+        bytes key = 1;
+        com.flick.data.proto.common.NodeAddress value = 2;
+    }
+}
+
+message Unchecked {
+    message UncheckedKey {
+        bytes previous = 1;
+        bytes hash = 2;
+    }
+
+    message UncheckedValue {
+        com.flick.data.proto.common.Block block = 1;
+        bytes account = 2;
+        int64 modifiedAt = 3;
+        int32 status = 4;
+    }
+    UncheckedKey key = 1;
+    UncheckedValue value = 2;
+}
+
+message Frontier {
+    message FrontierKey {
+        bytes hash = 1;
+    }
+
+    message FrontierValue {
+        bytes account = 1;
+    }
+    FrontierKey key = 1;
+    FrontierValue value = 2;
+}
+
+message Pending {
+
+    message PendingKey {
+        bytes account = 1;
+        bytes hash = 2;
+    }
+
+    message PendingValue {
+        bytes source = 1;
+        bytes amount = 2;
+        /* enum epoch */
+    }
+    AccountKey key = 1;
+    AccountValue value = 2;
+}
+    message AccountValue {
+        bytes head = 1;
+        bytes representative = 2;
+        bytes openBlock = 3;
+        bytes balance = 4;
+        int64 modified = 5;
+        int64 blockCount = 6;
+    }
+message Account {
+
+    AccountKey key = 1;
+    AccountValue value = 2;
+}
+
+message ConfirmationHeight {
+    message ConfirmationHeightValue {
+        int64 height = 1;
+        bytes frontier = 2;
+    }
+
+    AccountKey key = 1;
+    ConfirmationHeightValue value = 2;
+}
+
+message AccountKey {
+        bytes account = 1;
+}
+    message VoteByHash {
+        int32 type = 1;
+        bytes hash = 2;
+    }
+message Vote {
+
+    message VoteValue {
+
+        bytes account = 1;
+        bytes signature = 2;
+        int64 sequence = 3;
+        com.flick.data.proto.common.Block block = 4;
+        VoteByHash voteByHash = 5;
+    }
+
+    AccountKey key = 1;
+    VoteValue value = 2;
+}
+
+
+
+message Meta {
+    message MetaKey {
+        int32 type = 1;
+        bytes hash = 2;
+    }
+    message MetaValue {
+        bytes account = 1;
+        bytes signature = 2;
+        int64 sequence = 3;
+        com.flick.data.proto.common.Block block = 4;
+        VoteByHash voteByHash = 5;
+    }
+
+    MetaKey key = 1;
+    MetaValue value = 2;
+}
+
+message Pruned {
+    message PrunedKey {
+         bytes hash = 1;
+    }
+    message PrunedValue {
+    }
+    PrunedKey key = 1;
+    PrunedValue value = 2;
+}
+
+message OnlineWeight {
+    message OnlineWeightKey {
+        int64 timestamp = 1;
+    }
+    message OnlineWeightValue {
+        bytes amount = 1;
+    }
+
+    OnlineWeightKey key = 1;
+    OnlineWeightValue value = 2;
+}
+
+
+
+
+
