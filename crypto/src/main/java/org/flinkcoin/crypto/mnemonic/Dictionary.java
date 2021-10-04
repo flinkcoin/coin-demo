@@ -1,4 +1,4 @@
-package com.flick.crypto.mnemonic;
+package org.flinkcoin.crypto.mnemonic;
 
 import java.io.BufferedReader;
 import java.io.IOException;

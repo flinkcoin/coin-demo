@@ -1,8 +1,8 @@
 package com.flick.node.configuration.bootstrap;
 
-import com.flick.crypto.HashHelper;
-import com.flick.crypto.KeyGenerator;
-import com.flick.crypto.KeyPair;
+import org.flinkcoin.crypto.HashHelper;
+import org.flinkcoin.crypto.KeyGenerator;
+import org.flinkcoin.crypto.KeyPair;
 import com.flick.data.proto.common.Common;
 import com.flick.data.proto.common.Common.Block;
 import com.flick.data.proto.common.Common.Block.Body;

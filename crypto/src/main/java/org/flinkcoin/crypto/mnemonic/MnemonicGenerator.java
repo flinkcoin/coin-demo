@@ -1,8 +1,8 @@
-package com.flick.crypto.mnemonic;
+package org.flinkcoin.crypto.mnemonic;
 
-import com.flick.crypto.BitHelper;
-import com.flick.crypto.CryptoException;
-import com.flick.crypto.HashHelper;
+import org.flinkcoin.crypto.BitHelper;
+import org.flinkcoin.crypto.CryptoException;
+import org.flinkcoin.crypto.HashHelper;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;

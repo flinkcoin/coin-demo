@@ -1,4 +1,4 @@
-package com.flick.crypto;
+package org.flinkcoin.crypto;
 
 import java.io.Serializable;
 

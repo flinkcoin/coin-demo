@@ -1,8 +1,8 @@
 package com.flick.node;
 
 import com.beust.jcommander.JCommander;
-import com.flick.crypto.KeyGenerator;
-import com.flick.crypto.KeyPair;
+import org.flinkcoin.crypto.KeyGenerator;
+import org.flinkcoin.crypto.KeyPair;
 import org.flinkcoin.helper.helpers.Base32Helper;
 import org.flinkcoin.helper.helpers.RandomHelper;
 import org.flinkcoin.helper.helpers.UUIDHelper;

@@ -1,4 +1,4 @@
-package com.flick.crypto;
+package org.flinkcoin.crypto;
 
 import net.i2p.crypto.eddsa.EdDSAPrivateKey;
 
