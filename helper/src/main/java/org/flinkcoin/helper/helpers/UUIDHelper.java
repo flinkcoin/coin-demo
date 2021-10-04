@@ -1,4 +1,4 @@
-package com.flick.helper.helpers;
+package org.flinkcoin.helper.helpers;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;

@@ -2,8 +2,8 @@ package com.flick.node.services;
 
 import com.flick.data.proto.common.Common.Block;
 import com.flick.data.proto.communication.Message.BlockConfirmPub;
-import com.flick.helper.Pair;
-import com.flick.helper.helpers.UUIDHelper;
+import org.flinkcoin.helper.Pair;
+import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.caches.NodeCache;
 import com.flick.node.communication.CommonProcessor;
 import com.flick.node.configuration.ProcessorBase;

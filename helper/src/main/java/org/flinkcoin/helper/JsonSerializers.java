@@ -1,4 +1,4 @@
-package com.flick.helper;
+package org.flinkcoin.helper;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;

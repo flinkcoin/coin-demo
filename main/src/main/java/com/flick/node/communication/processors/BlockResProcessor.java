@@ -5,7 +5,7 @@ import com.flick.node.communication.*;
 import com.flick.data.proto.communication.Message;
 import com.flick.data.proto.communication.Message.BlockRes;
 import com.flick.data.proto.communication.Message.BlockVerifyPub;
-import com.flick.helper.helpers.UUIDHelper;
+import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.managers.CryptoManager;
 import com.flick.node.managers.NodeManager;
 import com.flick.node.voting.BlockVerifyVoting;

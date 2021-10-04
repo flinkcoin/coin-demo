@@ -1,6 +1,6 @@
 package com.flick.crypto;
 
-import com.flick.helper.helpers.ByteHelper;
+import org.flinkcoin.helper.helpers.ByteHelper;
 import java.math.BigInteger;
 import net.i2p.crypto.eddsa.EdDSAPrivateKey;
 import net.i2p.crypto.eddsa.EdDSAPublicKey;

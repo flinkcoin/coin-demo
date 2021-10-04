@@ -1,6 +1,6 @@
 package com.flick.node.configuration.bootstrap;
 
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.helper.helpers.Base32Helper;
 import com.google.protobuf.ByteString;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;

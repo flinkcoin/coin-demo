@@ -1,4 +1,4 @@
-package com.flick.helper;
+package org.flinkcoin.helper;
 
 public class Pair<U, V> {
 

@@ -1,7 +1,7 @@
 package com.flick.node.jobs;
 
 import com.flick.data.proto.storage.UnclaimedInfoBlock;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.helper.helpers.Base32Helper;
 import com.flick.node.storage.ColumnFamily;
 import com.flick.node.storage.Storage;
 import static com.flick.node.storage.Storage.NULL_HASH;

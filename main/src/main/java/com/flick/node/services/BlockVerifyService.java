@@ -3,7 +3,7 @@ package com.flick.node.services;
 import com.flick.data.proto.common.Common.FullBlock;
 import com.flick.data.proto.communication.Message;
 import com.flick.data.proto.communication.Message.BlockConfirmPub;
-import com.flick.helper.helpers.UUIDHelper;
+import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.caches.BlockCache;
 import com.flick.node.caches.NodeCache;
 import com.flick.node.communication.CommonProcessor;

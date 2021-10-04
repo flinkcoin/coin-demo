@@ -1,9 +1,9 @@
-package com.flick.helper;
+package org.flinkcoin.helper;
 
-import com.flick.helper.JsonSerializers.LocalDateDeserializer;
-import com.flick.helper.JsonSerializers.LocalDateSerializer;
-import com.flick.helper.JsonSerializers.LocalTimeDeserializer;
-import com.flick.helper.JsonSerializers.LocalTimeSerializer;
+import org.flinkcoin.helper.JsonSerializers.LocalDateDeserializer;
+import org.flinkcoin.helper.JsonSerializers.LocalDateSerializer;
+import org.flinkcoin.helper.JsonSerializers.LocalTimeDeserializer;
+import org.flinkcoin.helper.JsonSerializers.LocalTimeSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

@@ -4,7 +4,7 @@ import com.flick.crypto.CryptoException;
 import com.flick.crypto.HashHelper;
 import com.flick.data.proto.common.Common;
 import com.flick.data.proto.common.Common.FullBlock;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.helper.helpers.Base32Helper;
 import com.flick.node.caches.AccountCache;
 import com.flick.node.caches.BlockCache;
 import com.flick.node.caches.ClaimedBlockCache;

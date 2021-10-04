@@ -1,7 +1,7 @@
 package com.flick.node.managers;
 
 import com.flick.data.proto.common.Common;
-import com.flick.helper.helpers.Base32Helper;
+import org.flinkcoin.helper.helpers.Base32Helper;
 import com.flick.node.caches.NodeAddressCache;
 import com.flick.node.caches.NodeCache;
 import com.flick.node.communication.ClientInitializer;
