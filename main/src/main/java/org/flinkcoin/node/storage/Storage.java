@@ -1,15 +1,14 @@
 package org.flinkcoin.node.storage;
 
+import com.google.inject.Singleton;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
+import java.util.Optional;
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.data.proto.common.Common.FullBlock;
 import org.flinkcoin.data.proto.common.Common.Node;
 import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
 import org.flinkcoin.helper.helpers.ByteHelper;
-import com.google.inject.Singleton;
-import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
-import java.util.Optional;
-import javax.inject.Inject;
 import org.rocksdb.ReadOptions;
 import org.rocksdb.RocksDBException;
 import org.rocksdb.Transaction;

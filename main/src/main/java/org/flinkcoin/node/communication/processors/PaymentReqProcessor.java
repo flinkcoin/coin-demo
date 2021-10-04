@@ -1,21 +1,20 @@
 package org.flinkcoin.node.communication.processors;
 
-import org.flinkcoin.data.proto.api.Api;
-import org.flinkcoin.data.proto.common.Common.PaymentRequest;
-import org.flinkcoin.data.proto.communication.Message;
-import org.flinkcoin.data.proto.communication.Message.PaymentReq;
-import org.flinkcoin.helper.helpers.DateHelper;
-import org.flinkcoin.node.api.AccountServiceImpl;
-import org.flinkcoin.node.handlers.IdHandler;
-import org.flinkcoin.node.managers.CryptoManager;
-import org.flinkcoin.node.services.FloodService;
 import com.google.protobuf.Any;
 import io.netty.channel.ChannelHandlerContext;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
+import org.flinkcoin.data.proto.api.Api;
+import org.flinkcoin.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message.PaymentReq;
+import org.flinkcoin.helper.helpers.DateHelper;
+import org.flinkcoin.node.api.AccountServiceImpl;
 import org.flinkcoin.node.communication.BaseProcessor;
 import org.flinkcoin.node.communication.ChannelData;
+import org.flinkcoin.node.handlers.IdHandler;
+import org.flinkcoin.node.managers.CryptoManager;
+import org.flinkcoin.node.services.FloodService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
