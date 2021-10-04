@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>com.flick</groupId>
+        <groupId>org.flinkcoin</groupId>
         <artifactId>parent</artifactId>
         <version>0.0.0</version>
     </parent>
@@ -23,7 +23,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.flick.node.Main</mainClass>
+                            <mainClass>org.flinkcoin.node.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -83,15 +83,15 @@
             <artifactId>quartz</artifactId>
         </dependency>
         <dependency>                           
-            <groupId>com.flick</groupId>
+            <groupId>org.flinkcoin</groupId>
             <artifactId>helper</artifactId>
         </dependency>
         <dependency>                           
-            <groupId>com.flick</groupId>
+            <groupId>org.flinkcoin</groupId>
             <artifactId>crypto</artifactId>
         </dependency>
         <dependency>                           
-            <groupId>com.flick</groupId>
+            <groupId>org.flinkcoin</groupId>
             <artifactId>data</artifactId>
         </dependency>
         <dependency>                           
