@@ -1,6 +1,6 @@
 package com.flick.node.communication;
 
-import com.flick.data.MessageType;
+import org.flinkcoin.data.MessageType;
 import com.flick.data.proto.communication.Message;
 import com.flick.node.communication.processors.AuthenticationReqProcessor;
 import com.flick.node.communication.processors.AuthenticationResProcessor;
