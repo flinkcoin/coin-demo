@@ -1,6 +1,6 @@
 package com.flick.node.voting;
 
-import com.flick.helper.Pair;
+import org.flinkcoin.helper.Pair;
 import com.flick.node.configuration.ProcessorBase;
 import com.flick.node.services.BlockVerifyVotingService;
 import com.flick.node.storage.Storage;

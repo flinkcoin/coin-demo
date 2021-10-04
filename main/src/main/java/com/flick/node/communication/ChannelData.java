@@ -1,6 +1,6 @@
 package com.flick.node.communication;
 
-import com.flick.helper.helpers.RandomHelper;
+import org.flinkcoin.helper.helpers.RandomHelper;
 import com.google.protobuf.ByteString;
 import io.netty.channel.Channel;
 import java.util.concurrent.atomic.AtomicBoolean;

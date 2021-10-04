@@ -1,4 +1,4 @@
-package com.flick.helper.helpers;
+package org.flinkcoin.helper.helpers;
 
 public class ULIDHelper {
 

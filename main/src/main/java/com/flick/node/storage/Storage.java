@@ -4,7 +4,7 @@ import com.flick.data.proto.common.Common;
 import com.flick.data.proto.common.Common.FullBlock;
 import com.flick.data.proto.common.Common.Node;
 import com.flick.data.proto.storage.UnclaimedInfoBlock;
-import com.flick.helper.helpers.ByteHelper;
+import org.flinkcoin.helper.helpers.ByteHelper;
 import com.google.inject.Singleton;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
