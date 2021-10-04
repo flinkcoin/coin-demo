@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
    
     <parent>
-        <groupId>com.flick</groupId>
+        <groupId>org.flinkcoin</groupId>
         <artifactId>parent</artifactId>
         <version>0.0.0</version>
     </parent>
