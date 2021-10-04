@@ -1,19 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-        
+
     <groupId>org.flinkcoin</groupId>
     <artifactId>parent</artifactId>
     <version>0.0.0</version>
-    
+
     <packaging>pom</packaging>
-    
+
     <name>Flink</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>2.0.0</version>
+                <configuration>
+                    <verbose>false</verbose>
+                    <addSvnKeyWords>false</addSvnKeyWords>
+                    <canUpdateCopyright>true</canUpdateCopyright>
+                    <canUpdateDescription>true</canUpdateDescription>
+                    <canUpdateLicense>true</canUpdateLicense>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <licenseName>apache_v2</licenseName>
+                            <roots>
+                                <root>src/main/java</root>
+                                <root>src/test/java</root>
+                            </roots>
+                            <organizationName>Flink Foundation</organizationName>
+                            <inceptionYear>2021</inceptionYear>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -40,19 +72,12 @@
                 <plugin>
                     <groupId>org.xolstice.maven.plugins</groupId>
                     <artifactId>protobuf-maven-plugin</artifactId>
-                    <version>0.6.1</version>      
+                    <version>0.6.1</version>
                 </plugin>
-                
-
-                <!--                <plugin>
-                    <groupId>com.github.os72</groupId>
-                    <artifactId>protoc-jar-maven-plugin</artifactId>
-                    <version>3.11.4</version>
-                </plugin> -->
             </plugins>
-        </pluginManagement>    
+        </pluginManagement>
     </build>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -122,25 +147,25 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            <dependency>                           
+            <dependency>
                 <groupId>org.flinkcoin</groupId>
                 <artifactId>crypto</artifactId>
-                <version>0.0.0</version> 
+                <version>0.0.0</version>
             </dependency>
-            <dependency>                           
+            <dependency>
                 <groupId>org.flinkcoin</groupId>
                 <artifactId>helper</artifactId>
-                <version>0.0.0</version> 
+                <version>0.0.0</version>
             </dependency>
-            <dependency>                           
+            <dependency>
                 <groupId>org.flinkcoin</groupId>
                 <artifactId>data</artifactId>
-                <version>0.0.0</version> 
+                <version>0.0.0</version>
             </dependency>
-            <dependency>                           
-                <groupId>org.rocksdb</groupId> 
-                <artifactId>rocksdbjni</artifactId>  
-                <version>6.15.2</version>   
+            <dependency>
+                <groupId>org.rocksdb</groupId>
+                <artifactId>rocksdbjni</artifactId>
+                <version>6.15.2</version>
             </dependency>
             <dependency>
                 <groupId>com.beust</groupId>
@@ -183,7 +208,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <modules> 
+    <modules>
         <module>helper</module>
         <module>data</module>
         <module>crypto</module>
