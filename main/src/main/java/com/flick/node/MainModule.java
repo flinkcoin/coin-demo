@@ -1,6 +1,6 @@
 package com.flick.node;
 
-import com.flick.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message;
 import com.flick.node.communication.CommonProcessor;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;

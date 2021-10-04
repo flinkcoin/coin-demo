@@ -1,7 +1,7 @@
 package com.flick.node.communication;
 
 import org.flinkcoin.data.MessageType;
-import com.flick.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message;
 import com.flick.node.communication.processors.AuthenticationReqProcessor;
 import com.flick.node.communication.processors.AuthenticationResProcessor;
 import com.flick.node.communication.processors.BlockConfirmPubProcessor;

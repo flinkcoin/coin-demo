@@ -1,10 +1,10 @@
 package com.flick.node.communication.processors;
 
-import com.flick.data.proto.common.Common.FullBlock;
+import org.flinkcoin.data.proto.common.Common.FullBlock;
 import com.flick.node.communication.*;
-import com.flick.data.proto.communication.Message;
-import com.flick.data.proto.communication.Message.BlockReq;
-import com.flick.data.proto.communication.Message.BlockRes;
+import org.flinkcoin.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message.BlockReq;
+import org.flinkcoin.data.proto.communication.Message.BlockRes;
 import com.flick.node.caches.BlockCache;
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;

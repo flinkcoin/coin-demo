@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package com.flick.data.proto.api;
+package org.flinkcoin.data.proto.api;
  
 option java_multiple_files = false;
-option java_package = "com.flick.data.proto.api";
+option java_package = "org.flinkcoin.data.proto.api";
 import "common.proto";
 
 message PaymentTransactionReq {
-    com.flick.data.proto.common.PaymentRequest paymentRequest = 1;
+    org.flinkcoin.data.proto.common.PaymentRequest paymentRequest = 1;
 }
 
 message PaymentTransactionRes {
@@ -15,7 +15,7 @@ message PaymentTransactionRes {
 }   
 
 message TransactionReq {
-    com.flick.data.proto.common.Block block = 1;
+    org.flinkcoin.data.proto.common.Block block = 1;
 }
 
 message TransactionRes {
@@ -28,7 +28,7 @@ message ListBlockReq {
 }
 
 message ListBlockRes {
-    repeated com.flick.data.proto.common.Block block = 1;
+    repeated org.flinkcoin.data.proto.common.Block block = 1;
 }
 
 message ListUnclaimedBlockReq {
@@ -37,7 +37,7 @@ message ListUnclaimedBlockReq {
 }
 
 message ListUnclaimedBlockRes {
-    repeated com.flick.data.proto.common.Block block = 1;
+    repeated org.flinkcoin.data.proto.common.Block block = 1;
 }
 
 message LastBlockReq {
@@ -45,7 +45,7 @@ message LastBlockReq {
 }
 
 message LastBlockRes {
-    com.flick.data.proto.common.Block block = 1;
+    org.flinkcoin.data.proto.common.Block block = 1;
 }
 
 message GetBlockReq {
@@ -53,7 +53,7 @@ message GetBlockReq {
 }
 
 message GetBlockRes {
-    com.flick.data.proto.common.Block block = 1;
+    org.flinkcoin.data.proto.common.Block block = 1;
 }
 
 message AccountCountReq {
@@ -87,7 +87,7 @@ message InfoRes {
     bytes accountId = 2;
     BlockConfirm blockConfirm = 3;
     PaymentReceived paymentReceived = 4;
-    com.flick.data.proto.common.PaymentRequest paymentRequest = 5;
+    org.flinkcoin.data.proto.common.PaymentRequest paymentRequest = 5;
 }
 
 service AccountService {

@@ -1,8 +1,8 @@
 package com.flick.node.services;
 
-import com.flick.data.proto.common.Common.Node;
-import com.flick.data.proto.common.Common.NodeAddress;
-import com.flick.data.proto.communication.Message;
+import org.flinkcoin.data.proto.common.Common.Node;
+import org.flinkcoin.data.proto.common.Common.NodeAddress;
+import org.flinkcoin.data.proto.communication.Message;
 import org.flinkcoin.helper.Pair;
 import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.caches.NodeCache;

@@ -2,9 +2,9 @@ package com.flick.node.managers;
 
 import org.flinkcoin.crypto.KeyGenerator;
 import org.flinkcoin.crypto.KeyPair;
-import com.flick.data.proto.common.Common;
-import com.flick.data.proto.common.Common.Node;
-import com.flick.data.proto.common.Common.NodeAddress;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common.Node;
+import org.flinkcoin.data.proto.common.Common.NodeAddress;
 import org.flinkcoin.helper.helpers.Base32Helper;
 import com.flick.node.caches.NodeAddressCache;
 import com.flick.node.caches.NodeCache;

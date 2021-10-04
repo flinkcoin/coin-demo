@@ -1,7 +1,7 @@
 package com.flick.node.communication.processors;
 
 import com.flick.node.communication.*;
-import com.flick.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message;
 import com.flick.node.managers.CryptoManager;
 import com.flick.node.services.BlockVerifyService;
 import com.flick.node.services.FloodService;

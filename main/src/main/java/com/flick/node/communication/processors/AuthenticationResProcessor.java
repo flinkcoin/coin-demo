@@ -1,8 +1,8 @@
 package com.flick.node.communication.processors;
 
-import com.flick.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common;
 import com.flick.node.communication.*;
-import com.flick.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message;
 import org.flinkcoin.helper.Pair;
 import org.flinkcoin.helper.helpers.Base32Helper;
 import com.flick.node.managers.CryptoManager;

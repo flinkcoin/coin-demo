@@ -1,6 +1,6 @@
 package com.flick.node.jobs;
 
-import com.flick.data.proto.storage.UnclaimedInfoBlock;
+import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
 import org.flinkcoin.helper.helpers.Base32Helper;
 import com.flick.node.storage.ColumnFamily;
 import com.flick.node.storage.Storage;

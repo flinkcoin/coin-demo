@@ -1,6 +1,6 @@
 package com.flick.node.communication;
 
-import com.flick.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message;
 import com.google.protobuf.Any;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;

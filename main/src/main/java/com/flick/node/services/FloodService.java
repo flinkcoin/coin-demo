@@ -1,6 +1,6 @@
 package com.flick.node.services;
 
-import com.flick.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message;
 import com.flick.node.communication.CommonProcessor;
 import com.flick.node.configuration.ProcessorBase;
 import com.google.inject.Singleton;

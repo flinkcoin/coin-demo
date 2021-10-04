@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package com.flick.data.proto.common;
+package org.flinkcoin.data.proto.common;
  
 option java_multiple_files = false;
-option java_package = "com.flick.data.proto.common";
+option java_package = "org.flinkcoin.data.proto.common";
 
 message Block {
 

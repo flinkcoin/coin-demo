@@ -1,8 +1,8 @@
 package com.flick.node.communication.processors;
 
 import com.flick.node.communication.*;
-import com.flick.data.proto.communication.Message;
-import com.flick.data.proto.communication.Message.IAmAlive;
+import org.flinkcoin.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message.IAmAlive;
 import com.flick.node.managers.CryptoManager;
 import com.google.protobuf.Any;
 import io.netty.channel.ChannelHandlerContext;

@@ -1,7 +1,7 @@
 package com.flick.node.services;
 
-import com.flick.data.proto.common.Common;
-import com.flick.data.proto.storage.UnclaimedInfoBlock;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
 import org.flinkcoin.helper.helpers.DateHelper;
 import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.caches.AccountCache;

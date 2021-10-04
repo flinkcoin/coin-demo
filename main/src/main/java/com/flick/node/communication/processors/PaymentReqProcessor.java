@@ -1,10 +1,10 @@
 package com.flick.node.communication.processors;
 
-import com.flick.data.proto.api.Api;
-import com.flick.data.proto.common.Common.PaymentRequest;
+import org.flinkcoin.data.proto.api.Api;
+import org.flinkcoin.data.proto.common.Common.PaymentRequest;
 import com.flick.node.communication.*;
-import com.flick.data.proto.communication.Message;
-import com.flick.data.proto.communication.Message.PaymentReq;
+import org.flinkcoin.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message.PaymentReq;
 import org.flinkcoin.helper.helpers.DateHelper;
 import com.flick.node.api.AccountServiceImpl;
 import com.flick.node.handlers.IdHandler;
