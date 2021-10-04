@@ -1,7 +1,7 @@
 package com.flick.node.managers;
 
-import com.flick.crypto.KeyGenerator;
-import com.flick.crypto.KeyPair;
+import org.flinkcoin.crypto.KeyGenerator;
+import org.flinkcoin.crypto.KeyPair;
 import com.flick.data.proto.common.Common;
 import com.flick.data.proto.common.Common.Node;
 import com.flick.data.proto.common.Common.NodeAddress;

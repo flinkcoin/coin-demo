@@ -1,7 +1,7 @@
 package com.flick.node.handlers;
 
-import com.flick.crypto.CryptoException;
-import com.flick.crypto.HashHelper;
+import org.flinkcoin.crypto.CryptoException;
+import org.flinkcoin.crypto.HashHelper;
 import com.flick.data.proto.common.Common;
 import com.flick.data.proto.common.Common.FullBlock;
 import org.flinkcoin.helper.helpers.Base32Helper;

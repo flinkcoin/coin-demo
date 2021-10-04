@@ -1,4 +1,4 @@
-package com.flick.crypto;
+package org.flinkcoin.crypto;
 
 import org.flinkcoin.helper.helpers.ByteHelper;
 import java.math.BigInteger;

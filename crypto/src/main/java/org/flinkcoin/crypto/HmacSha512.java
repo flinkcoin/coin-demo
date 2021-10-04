@@ -1,4 +1,4 @@
-package com.flick.crypto;
+package org.flinkcoin.crypto;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;

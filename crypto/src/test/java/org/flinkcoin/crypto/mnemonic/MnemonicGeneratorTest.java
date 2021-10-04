@@ -1,6 +1,6 @@
-package com.flick.crypto.mnemonic;
+package org.flinkcoin.crypto.mnemonic;
 
-import com.flick.crypto.CryptoException;
+import org.flinkcoin.crypto.CryptoException;
 import java.io.IOException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
