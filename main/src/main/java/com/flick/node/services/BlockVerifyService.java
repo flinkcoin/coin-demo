@@ -1,8 +1,8 @@
 package com.flick.node.services;
 
-import com.flick.data.proto.common.Common.FullBlock;
-import com.flick.data.proto.communication.Message;
-import com.flick.data.proto.communication.Message.BlockConfirmPub;
+import org.flinkcoin.data.proto.common.Common.FullBlock;
+import org.flinkcoin.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message.BlockConfirmPub;
 import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.caches.BlockCache;
 import com.flick.node.caches.NodeCache;

@@ -1,6 +1,6 @@
 package com.flick.node.caches;
 
-import com.flick.data.proto.common.Common.FullBlock;
+import org.flinkcoin.data.proto.common.Common.FullBlock;
 import org.flinkcoin.helper.helpers.Base32Helper;
 import com.flick.node.storage.ColumnFamily;
 import com.flick.node.storage.Storage;

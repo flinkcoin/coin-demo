@@ -1,9 +1,9 @@
 package com.flick.node.storage;
 
-import com.flick.data.proto.common.Common;
-import com.flick.data.proto.common.Common.FullBlock;
-import com.flick.data.proto.common.Common.Node;
-import com.flick.data.proto.storage.UnclaimedInfoBlock;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common.FullBlock;
+import org.flinkcoin.data.proto.common.Common.Node;
+import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
 import org.flinkcoin.helper.helpers.ByteHelper;
 import com.google.inject.Singleton;
 import com.google.protobuf.ByteString;

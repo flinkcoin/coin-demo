@@ -1,10 +1,10 @@
 package com.flick.node.communication.processors;
 
-import com.flick.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common;
 import com.flick.node.communication.*;
-import com.flick.data.proto.communication.Message;
-import com.flick.data.proto.communication.Message.BlockRes;
-import com.flick.data.proto.communication.Message.BlockVerifyPub;
+import org.flinkcoin.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message.BlockRes;
+import org.flinkcoin.data.proto.communication.Message.BlockVerifyPub;
 import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.managers.CryptoManager;
 import com.flick.node.managers.NodeManager;

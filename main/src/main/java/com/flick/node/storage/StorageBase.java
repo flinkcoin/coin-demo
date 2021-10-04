@@ -1,6 +1,6 @@
 package com.flick.node.storage;
 
-import com.flick.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.helper.ThrowableConsumer;
 import org.flinkcoin.helper.ThrowableFunction;
 import org.flinkcoin.helper.helpers.ByteHelper;

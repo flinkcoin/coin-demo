@@ -1,6 +1,6 @@
 package com.flick.node.managers;
 
-import com.flick.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common;
 import com.google.protobuf.ByteString;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;

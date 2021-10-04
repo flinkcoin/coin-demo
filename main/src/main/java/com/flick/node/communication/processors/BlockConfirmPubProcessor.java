@@ -1,8 +1,8 @@
 package com.flick.node.communication.processors;
 
 import com.flick.node.communication.*;
-import com.flick.data.proto.communication.Message;
-import com.flick.data.proto.communication.Message.BlockConfirmPub;
+import org.flinkcoin.data.proto.communication.Message;
+import org.flinkcoin.data.proto.communication.Message.BlockConfirmPub;
 import org.flinkcoin.helper.Pair;
 import com.flick.node.caches.BlockCache;
 import com.flick.node.managers.CryptoManager;

@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package com.flick.data.proto.communication;
+package org.flinkcoin.data.proto.communication;
 
 import "google/protobuf/any.proto";
 import "common.proto";
 
 option java_multiple_files = true;
-option java_package = "com.flick.data.proto.communication";
+option java_package = "org.flinkcoin.data.proto.communication";
 
 message Message {
 
@@ -25,8 +25,8 @@ message Message {
     message AuthenticationRes {
         message Body {
             bytes token = 1;
-            com.flick.data.proto.common.Node node = 2;
-            com.flick.data.proto.common.NodeAddress nodeAddress = 3;
+            org.flinkcoin.data.proto.common.Node node = 2;
+            org.flinkcoin.data.proto.common.NodeAddress nodeAddress = 3;
         }
       
         Body body = 2;
@@ -37,8 +37,8 @@ message Message {
         message Body {
             bytes msgId = 1;
             bytes nodeId = 2;
-            com.flick.data.proto.common.Node node = 3;
-            com.flick.data.proto.common.NodeAddress nodeAddress = 4;
+            org.flinkcoin.data.proto.common.Node node = 3;
+            org.flinkcoin.data.proto.common.NodeAddress nodeAddress = 4;
         }
         Body body = 2;
         bytes signature = 3;
@@ -48,7 +48,7 @@ message Message {
         message Body {
             bytes msgId = 1;
             bytes nodeId = 2;
-            com.flick.data.proto.common.Block block = 3;
+            org.flinkcoin.data.proto.common.Block block = 3;
         }
         Body body = 2;
         bytes signature = 3;
@@ -59,7 +59,7 @@ message Message {
         message Body {
             bytes msgId = 1;
             bytes nodeId = 2;
-            com.flick.data.proto.common.PaymentRequest paymentRequest = 3;
+            org.flinkcoin.data.proto.common.PaymentRequest paymentRequest = 3;
         }
         Body body = 2;
         bytes signature = 3;
@@ -105,7 +105,7 @@ message Message {
     message BlockRes {
         bytes accountId = 1;
         bytes fromBlockHash = 2;
-        repeated com.flick.data.proto.common.FullBlock blocks = 3;
+        repeated org.flinkcoin.data.proto.common.FullBlock blocks = 3;
     }
     
 
@@ -124,7 +124,7 @@ message Message {
     }
 
     message TelemetryReq {
-        com.flick.data.proto.common.Block block = 1;
+        org.flinkcoin.data.proto.common.Block block = 1;
     }
 
     message TelemetryRes {
@@ -147,14 +147,14 @@ message Message {
     } 
 
     message Publish {
-        com.flick.data.proto.common.Block block = 1;
+        org.flinkcoin.data.proto.common.Block block = 1;
     }
 
 
     message AccountBulkPush {
         bytes start = 1;
         bytes stop = 2;
-        repeated com.flick.data.proto.common.Block blocks = 3;
+        repeated org.flinkcoin.data.proto.common.Block blocks = 3;
     }
 
     message AccountBulkPull {
@@ -166,7 +166,7 @@ message Message {
     message BulkPush {
         bytes start = 1;
         bytes stop = 2;
-        repeated com.flick.data.proto.common.Block blocks = 3;
+        repeated org.flinkcoin.data.proto.common.Block blocks = 3;
     }
 
     message BulkPull {
@@ -185,7 +185,7 @@ message Message {
 
     message ConfirmReq {
         ConfirmReqByHash confirmReqByHash = 1;
-        com.flick.data.proto.common.Block block = 2;
+        org.flinkcoin.data.proto.common.Block block = 2;
     }
 
     message VoteByHash {
@@ -200,7 +200,7 @@ message Message {
         }
         VoteCommon voteCommon = 1;
         VoteByHash voteByHash = 2;
-        com.flick.data.proto.common.Block block = 3;
+        org.flinkcoin.data.proto.common.Block block = 3;
     }
 
 

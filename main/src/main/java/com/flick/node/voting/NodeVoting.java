@@ -1,7 +1,7 @@
 package com.flick.node.voting;
 
-import com.flick.data.proto.common.Common.Node;
-import com.flick.data.proto.common.Common.NodeAddress;
+import org.flinkcoin.data.proto.common.Common.Node;
+import org.flinkcoin.data.proto.common.Common.NodeAddress;
 import org.flinkcoin.helper.Pair;
 import com.flick.node.configuration.ProcessorBase;
 import com.flick.node.storage.Storage;

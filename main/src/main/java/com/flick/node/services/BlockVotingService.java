@@ -1,9 +1,9 @@
 package com.flick.node.services;
 
-import com.flick.data.proto.api.Api;
-import com.flick.data.proto.common.Common;
-import com.flick.data.proto.common.Common.FullBlock;
-import com.flick.data.proto.storage.UnclaimedInfoBlock;
+import org.flinkcoin.data.proto.api.Api;
+import org.flinkcoin.data.proto.common.Common;
+import org.flinkcoin.data.proto.common.Common.FullBlock;
+import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
 import org.flinkcoin.helper.ThrowableConsumer;
 import org.flinkcoin.helper.helpers.UUIDHelper;
 import com.flick.node.api.AccountServiceImpl;

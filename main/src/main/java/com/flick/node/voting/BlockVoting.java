@@ -1,7 +1,7 @@
 package com.flick.node.voting;
 
-import com.flick.data.proto.api.Api.InfoRes;
-import com.flick.data.proto.api.Api.InfoRes.BlockConfirm;
+import org.flinkcoin.data.proto.api.Api.InfoRes;
+import org.flinkcoin.data.proto.api.Api.InfoRes.BlockConfirm;
 import org.flinkcoin.helper.Pair;
 import com.flick.node.api.AccountServiceImpl;
 import com.flick.node.configuration.ProcessorBase;

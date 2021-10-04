@@ -1,6 +1,6 @@
 package com.flick.node.voting.stock;
 
-import com.flick.data.proto.common.Common.FullBlock;
+import org.flinkcoin.data.proto.common.Common.FullBlock;
 import com.google.protobuf.ByteString;
 import java.util.ArrayList;
 import java.util.List;
