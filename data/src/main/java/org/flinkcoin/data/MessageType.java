@@ -1,4 +1,4 @@
-package com.flick.data;
+package org.flinkcoin.data;
 
 import java.util.HashMap;
 import java.util.Map;
