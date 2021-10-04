@@ -1,9 +1,5 @@
 package org.flinkcoin.node.caches;
 
-import org.flinkcoin.data.proto.common.Common.Block;
-import org.flinkcoin.helper.helpers.Base32Helper;
-import org.flinkcoin.node.storage.ColumnFamily;
-import org.flinkcoin.node.storage.Storage;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
 import java.util.Optional;
@@ -14,25 +10,28 @@ import org.cache2k.Cache;
 import org.cache2k.Cache2kBuilder;
 import org.cache2k.io.CacheLoader;
 import org.cache2k.io.CacheLoaderException;
+import org.flinkcoin.helper.helpers.Base32Helper;
+import org.flinkcoin.node.storage.ColumnFamily;
+import org.flinkcoin.node.storage.Storage;
 import org.rocksdb.RocksDBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Singleton
 public class AccountCache {
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountCache.class);
-    
+
     private static final int MAX_ELEMENTS = 10000;
     private static final int EXPIRY_TIME = 1;
-    
+
     private final Cache<ByteString, ByteString> cache;
     private final Storage storage;
-    
+
     @Inject
     public AccountCache(Storage storage) {
         this.storage = storage;
-        
+
         this.cache = new Cache2kBuilder<ByteString, ByteString>() {
         }
                 .name("AccountCache")
@@ -47,18 +46,18 @@ public class AccountCache {
                 })
                 .build();
     }
-    
+
     private ByteString findBlockHash(ByteString accountId) throws IllegalStateException, RocksDBException, InvalidProtocolBufferException {
-        
+
         byte[] hashBytes = storage.get(ColumnFamily.ACCOUNT, accountId);
-        
+
         if (hashBytes == null) {
             throw new CacheLoaderException("Cannot find block hash for account id: " + Base32Helper.encode(accountId.toByteArray()));
         }
-        
+
         return ByteString.copyFrom(hashBytes);
     }
-    
+
     public Optional<ByteString> getLastBlockHash(ByteString accountId) {
         ByteString blockHash;
         try {
@@ -66,10 +65,10 @@ public class AccountCache {
         } catch (CacheLoaderException ex) {
             return Optional.empty();
         }
-        
+
         return Optional.of(blockHash);
     }
-    
+
     public void setLastBlockHash(ByteString accountId, ByteString blockHash) {
         cache.put(accountId, blockHash);
     }
