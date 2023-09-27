@@ -1,0 +1,5 @@
+# Used by Gradle task prepareGithubTests
+# to determinate commit of Ethereum tests repo https://github.com/ethereum/tests
+# which should be checked out in local repo directory
+# EthereumJ is tested with files from this commit
+GitHubTests.commit=d4a61235428f1886983f19a5ac7bd7c5c39c81f4
