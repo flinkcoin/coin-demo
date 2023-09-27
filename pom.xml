@@ -234,6 +234,7 @@
         <module>helper</module>
         <module>data</module>
         <module>crypto</module>
+        <module>evm</module>
         <module>main</module>
     </modules>
 </project>

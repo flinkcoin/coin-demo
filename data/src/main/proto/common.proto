@@ -20,6 +20,8 @@ message Block {
         SEND = 1;
         RECEIVE = 2;
         UPDATE = 3;
+        SEND_TOKEN = 4;
+        RECEIVE_TOKEN = 5;
     }
 
     message PublicKeys {
@@ -39,13 +41,20 @@ message Block {
         bytes sendAccountId = 9;
         bytes receiveBlockHash = 10;
         bytes referenceCode= 11;
+
         PublicKeys publicKeys = 12;
+
+        map<bytes, Token> tokens = 13; // key is tokenId
+    }
+
+    message Token {
+        int64 balance = 1;
+        int64 amount = 2;
     }
 
     message Signatures {
         repeated bytes signature = 1;
     }
-
 
     message Hash {
         bytes hash = 1;
