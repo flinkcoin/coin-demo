@@ -29,3 +29,4 @@ target/
 tmpdata
 /main/nbproject/
 /mobile/wallet-proxy/main/nbproject/
+.idea/
