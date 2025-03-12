@@ -89,6 +89,12 @@ public class ValidationHandler {
                     checkUpdateBlock(previousBlock, block);
 
                     break;
+                case ADD_NFT:
+                    previousBlock = checkAccountAndPreviousBlock(block);
+                    checkSignature(previousBlock, block);
+                    checkAddNftBlock(previousBlock, block);
+
+                    break;
                 default:
                     throw new ValidationException("Strange block type!");
             }
@@ -157,6 +163,14 @@ public class ValidationHandler {
         if (!Objects.equals(previousBlock.getBlock().getBody().getAmount(), block.getBody().getAmount())) {
             throw new ValidationException("Amount has to be the same!");
         }
+
+        if (!Objects.equals(previousBlock.getBlock().getBody().getBalance(), block.getBody().getBalance())) {
+            throw new ValidationException("balance has to be the same!");
+        }
+    }
+
+
+    private void checkAddNftBlock(FullBlock previousBlock, Common.Block block) throws ValidationException, CryptoException {
 
         if (!Objects.equals(previousBlock.getBlock().getBody().getBalance(), block.getBody().getBalance())) {
             throw new ValidationException("balance has to be the same!");
