@@ -17,27 +17,11 @@ package org.flinkcoin.node.api;
 
 import com.google.protobuf.Any;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.InvalidProtocolBufferException;
 import io.grpc.stub.StreamObserver;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.flinkcoin.data.proto.api.AccountServiceGrpc.AccountServiceImplBase;
 import org.flinkcoin.data.proto.api.Api;
-import org.flinkcoin.data.proto.api.Api.AccountCountReq;
-import org.flinkcoin.data.proto.api.Api.AccountCountRes;
-import org.flinkcoin.data.proto.api.Api.GetBlockReq;
-import org.flinkcoin.data.proto.api.Api.GetBlockRes;
-import org.flinkcoin.data.proto.api.Api.InfoRes;
-import org.flinkcoin.data.proto.api.Api.LastBlockReq;
-import org.flinkcoin.data.proto.api.Api.LastBlockRes;
-import org.flinkcoin.data.proto.api.Api.ListBlockReq;
-import org.flinkcoin.data.proto.api.Api.ListBlockRes;
-import org.flinkcoin.data.proto.api.Api.ListUnclaimedBlockReq;
-import org.flinkcoin.data.proto.api.Api.ListUnclaimedBlockRes;
+import org.flinkcoin.data.proto.api.Api.*;
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.data.proto.common.Common.PaymentRequest;
 import org.flinkcoin.data.proto.communication.Message;
@@ -56,10 +40,19 @@ import org.flinkcoin.node.services.BlockService;
 import org.flinkcoin.node.services.FloodService;
 import org.flinkcoin.node.storage.ColumnFamily;
 import org.flinkcoin.node.storage.Storage;
-import static org.flinkcoin.node.storage.Storage.NULL_HASH;
 import org.rocksdb.RocksDBException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static org.flinkcoin.node.storage.Storage.NULL_HASH;
 
 @Singleton
 public class AccountServiceImpl extends AccountServiceImplBase {
@@ -81,7 +74,7 @@ public class AccountServiceImpl extends AccountServiceImplBase {
 
     @Inject
     public AccountServiceImpl(Storage storage, BlockService blockService, FloodService messageService, IdHandler idHandler, NodeManager nodeManager,
-            CryptoManager cryptoManager, BlockCache blockCache, AccountCache accountCache, AccountUnclaimedCache accountUnclaimedCache, UnclaimedBlockCache unclaimedBlockCache) {
+                              CryptoManager cryptoManager, BlockCache blockCache, AccountCache accountCache, AccountUnclaimedCache accountUnclaimedCache, UnclaimedBlockCache unclaimedBlockCache) {
         this.storage = storage;
         this.blockService = blockService;
         this.messageService = messageService;
@@ -251,6 +244,61 @@ public class AccountServiceImpl extends AccountServiceImplBase {
         infoObservers.put(request.getId(), responseObserver);
     }
 
+    @Override
+    public void queryNft(Api.QueryReq request, StreamObserver<Api.QueryRes> responseObserver) {
+        Api.QueryRes.Builder queryResBuilder = Api.QueryRes.newBuilder();
+
+        ByteString nftCode = request.getNftCode();
+
+        queryResBuilder.setExists(false);
+
+        try {
+            List<Map.Entry<ByteString, ByteString>> allNft = storage.getAllNft();
+
+            for (Map.Entry<ByteString, ByteString> entry : allNft) {
+                ByteString key = entry.getKey();
+                int i = calculateHammingDistance(nftCode, key);
+
+                if (i < 30) {
+                    queryResBuilder.setExists(true);
+                    queryResBuilder.setAccountId(entry.getValue());
+                    storage.getAccount(entry.getValue())
+                            .ifPresent(a -> {
+                                try {
+                                    storage.getBlock(a)
+                                            .ifPresent(b -> queryResBuilder
+                                                    .setAccountCode(b.getBlock().getBody().getAccountCode()));
+                                } catch (RocksDBException e) {
+                                    throw new RuntimeException(e);
+                                } catch (InvalidProtocolBufferException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            });
+                }
+            }
+        } catch (Exception ex) {
+            LOGGER.error("Something is wrong!", ex);
+        }
+
+        responseObserver.onNext(queryResBuilder.build());
+        responseObserver.onCompleted();
+    }
+
+    public static int calculateHammingDistance(ByteString bs1, ByteString bs2) {
+        if (bs1.size() != bs2.size()) {
+            throw new IllegalArgumentException("ByteStrings must be of the same length");
+        }
+
+        int distance = 0;
+        for (int i = 0; i < bs1.size(); i++) {
+            byte b1 = bs1.byteAt(i);
+            byte b2 = bs2.byteAt(i);
+            distance += Integer.bitCount(b1 ^ b2);
+        }
+
+        return distance;
+    }
+
     /**
      * MAKE THIS IN SERVICE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! To slow this way!
      *
@@ -312,5 +360,6 @@ public class AccountServiceImpl extends AccountServiceImplBase {
         blockService.newBlock(Pair.of(nodeManager.getNodeId(), block));
         messageService.newMessage(BaseProcessor.makeMessage(Any.pack(blockPubBuilder.build())));
     }
+
 
 }

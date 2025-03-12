@@ -20,6 +20,8 @@ message Block {
         SEND = 1;
         RECEIVE = 2;
         UPDATE = 3;
+        ADD_NFT = 4;
+        DEL_NFT = 5;
     }
 
     message PublicKeys {
@@ -40,6 +42,9 @@ message Block {
         bytes receiveBlockHash = 10;
         bytes referenceCode= 11;
         PublicKeys publicKeys = 12;
+//        new
+        bytes accountCode = 13;
+        bytes nftCode = 14;
     }
 
     message Signatures {

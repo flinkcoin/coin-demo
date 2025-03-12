@@ -26,7 +26,7 @@ hs_err_pid*
 /logs/
 target/
 /crypto/nbproject/
-tmpdata
+/tmpdata/
 /main/nbproject/
 /mobile/wallet-proxy/main/nbproject/
 .idea/

@@ -90,6 +90,16 @@ message InfoRes {
     org.flinkcoin.data.proto.common.PaymentRequest paymentRequest = 5;
 }
 
+message QueryReq {
+    bytes nftCode = 1;
+}
+
+message QueryRes {
+    bool exists = 1;
+    bytes accountId = 2;
+    bytes accountCode = 3;
+}
+
 service AccountService {
     rpc getBlock(GetBlockReq) returns (GetBlockRes);
     rpc paymentRequest(PaymentTransactionReq) returns (PaymentTransactionRes);
@@ -99,4 +109,5 @@ service AccountService {
     rpc lastBlock(LastBlockReq) returns (LastBlockRes);
     rpc listUnclaimedBlocks(ListUnclaimedBlockReq) returns (ListUnclaimedBlockRes);
     rpc receiveInfos(InfoReq) returns (stream InfoRes);
+    rpc queryNft(QueryReq) returns (QueryRes);
 }

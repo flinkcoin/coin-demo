@@ -68,7 +68,7 @@ public class Main {
                 .addObject(commandLineArguments)
                 .addCommand(generateCommand)
                 .addCommand(daemonCommand)
-                .programName("Flick")
+                .programName("Flink")
                 .build();
 
         jc.parse(args);

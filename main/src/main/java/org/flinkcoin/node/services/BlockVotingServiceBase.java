@@ -60,6 +60,10 @@ public abstract class BlockVotingServiceBase extends ProcessorBase<ByteString> {
         } else if (block.getBlock().getBody().getBlockType() == Common.Block.BlockType.SEND) {
             storage.putUnclaimedInfoBlock(t, ByteString.copyFrom(UUIDHelper.asBytes()),
                     prepareInfoBlock(block.getBlock().getBody().getSendAccountId(), UnclaimedInfoBlock.Action.CREATE, block.getBlock().getBlockHash().getHash()));
+        } else if (block.getBlock().getBody().getBlockType() == Common.Block.BlockType.ADD_NFT) {
+            storage.putNftCode(t,block.getBlock().getBody().getNftCode(),block.getBlock().getBody().getAccountId());
+        } else if (block.getBlock().getBody().getBlockType() == Common.Block.BlockType.DEL_NFT) {
+            storage.deleteNftCode(t,block.getBlock().getBody().getNftCode());
         }
 
         storage.putBlock(t, block.getBlock().getBlockHash().getHash(), block);

@@ -19,9 +19,6 @@ import com.google.inject.Singleton;
 import com.google.protobuf.ByteString;
 import io.reactivex.rxjava3.core.BackpressureOverflowStrategy;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import java.util.Optional;
-import javax.inject.Inject;
-import javax.inject.Provider;
 import org.flinkcoin.data.proto.api.Api;
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.data.proto.common.Common.FullBlock;
@@ -34,6 +31,10 @@ import org.rocksdb.RocksDBException;
 import org.rocksdb.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+import java.util.Optional;
 
 @Singleton
 public class BlockVotingService extends BlockVotingServiceBase {

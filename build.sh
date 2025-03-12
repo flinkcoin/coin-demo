@@ -1,6 +1,6 @@
 #!/bin/bash
 
-JAVA_HOME=/usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
+JAVA_HOME=/usr/lib/jvm/temurin-21-jdk-amd64
 
 export -p JAVA_HOME
 

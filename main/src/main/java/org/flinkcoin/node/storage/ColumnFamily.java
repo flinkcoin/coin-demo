@@ -24,7 +24,8 @@ public enum ColumnFamily {
     UNCLAIMED_BLOCK(6, "unclaimed_block"),
     WEIGHT(7, "weight"),
     NODE(8, "node"),
-    NODE_ADDRESS(9, "node_address");
+    NODE_ADDRESS(9, "node_address"),
+    NFT_CODE(10, "nft_code");
 
     private final int id;
     private final String name;

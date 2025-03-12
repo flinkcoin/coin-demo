@@ -27,3 +27,8 @@ message UnclaimedInfoBlock {
     Action action = 2;
     bytes blockHash = 3;
 }
+
+message NftPair {
+    bytes code = 1;
+    bytes accountId = 2;
+}

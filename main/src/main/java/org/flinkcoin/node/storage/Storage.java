@@ -18,7 +18,6 @@ package org.flinkcoin.node.storage;
 import com.google.inject.Singleton;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
-import java.util.Optional;
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.data.proto.common.Common.FullBlock;
 import org.flinkcoin.data.proto.common.Common.Node;
@@ -26,9 +25,12 @@ import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
 import org.flinkcoin.helper.helpers.ByteHelper;
 import org.rocksdb.ReadOptions;
 import org.rocksdb.RocksDBException;
+import org.rocksdb.RocksIterator;
 import org.rocksdb.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.*;
 
 @Singleton
 public class Storage extends StorageBase {
@@ -116,5 +118,39 @@ public class Storage extends StorageBase {
 
     public void putNodeAddress(Transaction t, ByteString nodeId, Common.NodeAddress nodeAddress) throws RocksDBException {
         t.put(getHandle(ColumnFamily.NODE_ADDRESS), nodeId.toByteArray(), nodeAddress.toByteArray());
+    }
+    
+    public void putNftCode(Transaction t, ByteString nftCode, ByteString accountId) throws RocksDBException {
+        t.put(getHandle(ColumnFamily.NFT_CODE), nftCode.toByteArray(), accountId.toByteArray());
+    }
+
+    public void deleteNftCode(Transaction t, ByteString nftCode) throws RocksDBException {
+        t.delete(getHandle(ColumnFamily.NFT_CODE), nftCode.toByteArray());
+    }
+
+    public List<Map.Entry<ByteString, ByteString>> getAllNft() throws RocksDBException {
+        List<Map.Entry<ByteString, ByteString>> nftList = new ArrayList<>();
+        try (RocksIterator iterator = getIterator(ColumnFamily.NFT_CODE)) {
+            for (iterator.seekToFirst(); iterator.isValid(); iterator.next()) {
+                ByteString key = ByteString.copyFrom(iterator.key());
+                ByteString value = ByteString.copyFrom(iterator.value());
+                nftList.add(new AbstractMap.SimpleEntry<>(key, value));
+            }
+        }
+        return nftList;
+    }
+
+    public Optional<ByteString> getAccount( ByteString accountId) throws RocksDBException {
+         byte[] bytes = get(ColumnFamily.ACCOUNT, accountId);
+
+         return bytes == null ? Optional.empty() : Optional.of(ByteString.copyFrom(bytes));
+    }
+
+    public Optional<FullBlock> getBlock( ByteString blockHash) throws RocksDBException, InvalidProtocolBufferException {
+        byte[] bytes = get(ColumnFamily.BLOCK, blockHash);
+        if (bytes == null) {
+            return Optional.empty();
+        }
+        return Optional.of(FullBlock.parseFrom(bytes));
     }
 }
