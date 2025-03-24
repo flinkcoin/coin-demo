@@ -45,6 +45,7 @@ message Block {
 //        new
         bytes accountCode = 13;
         bytes nftCode = 14;
+        bool spotterVoteReal = 15;
     }
 
     message Signatures {

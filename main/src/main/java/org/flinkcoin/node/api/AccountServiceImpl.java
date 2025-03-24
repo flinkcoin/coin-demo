@@ -26,6 +26,7 @@ import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.data.proto.common.Common.PaymentRequest;
 import org.flinkcoin.data.proto.communication.Message;
 import org.flinkcoin.helper.Pair;
+import org.flinkcoin.helper.helpers.Base32Helper;
 import org.flinkcoin.helper.helpers.DateHelper;
 import org.flinkcoin.helper.helpers.UUIDHelper;
 import org.flinkcoin.node.caches.AccountCache;
@@ -245,12 +246,71 @@ public class AccountServiceImpl extends AccountServiceImplBase {
     }
 
     @Override
+    public void voteNft(Api.VoteReq request, StreamObserver<Api.VoteRes> responseObserver) {
+        Api.VoteRes.Builder voteResBuilder = Api.VoteRes.newBuilder();
+
+        ByteString nftCode = request.getNftCode();
+        boolean real = request.getReal();
+
+        NftMatch nft = findNft(nftCode);
+
+        if (nft.isExists()) {
+            storage.vote(nft.getKey(),real);
+
+            try {
+                int nftVoteFake = storage.getNftVoteFake(nft.getKey());
+                int nftVoteReal = storage.getNftVoteReal(nft.getKey());
+                voteResBuilder.setNftVoteFake(nftVoteFake);
+                voteResBuilder.setNftVoteReal(nftVoteReal);
+            } catch (RocksDBException e) {
+                LOGGER.error("Something is wrong!", e);
+            }
+        }
+
+        responseObserver.onNext(voteResBuilder.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void queryNft(Api.QueryReq request, StreamObserver<Api.QueryRes> responseObserver) {
         Api.QueryRes.Builder queryResBuilder = Api.QueryRes.newBuilder();
+        queryResBuilder.setExists(false);
 
         ByteString nftCode = request.getNftCode();
 
-        queryResBuilder.setExists(false);
+        NftMatch nft = findNft(nftCode);
+
+        if (nft.isExists()) {
+            queryResBuilder.setExists(true);
+            queryResBuilder.setAccountId(nft.getAccountId());
+            queryResBuilder.setAccountCode(nft.getAccountCode());
+            queryResBuilder.setSpotterVoteReal(nft.isSpotterVoteReal());
+
+            setVoting(nft, queryResBuilder);
+        }
+
+        responseObserver.onNext(queryResBuilder.build());
+        responseObserver.onCompleted();
+    }
+
+    private void setVoting(NftMatch nft, QueryRes.Builder queryResBuilder) {
+        int nftVoteFake = 0;
+        int nftVoteReal = 0;
+        try {
+            nftVoteFake = storage.getNftVoteFake(nft.getKey());
+            nftVoteReal = storage.getNftVoteReal(nft.getKey());
+        } catch (RocksDBException e) {
+            LOGGER.error("Something is wrong!", e);
+        }
+
+        queryResBuilder.setNftVoteFake(nftVoteFake);
+        queryResBuilder.setNftVoteReal(nftVoteReal);
+    }
+
+    private NftMatch findNft(ByteString nftCode) {
+
+        NftMatch nftMatch = new NftMatch();
+
 
         try {
             List<Map.Entry<ByteString, ByteString>> allNft = storage.getAllNft();
@@ -259,15 +319,21 @@ public class AccountServiceImpl extends AccountServiceImplBase {
                 ByteString key = entry.getKey();
                 int i = calculateHammingDistance(nftCode, key);
 
-                if (i < 30) {
-                    queryResBuilder.setExists(true);
-                    queryResBuilder.setAccountId(entry.getValue());
+                if (i < 40) {
+
+                    nftMatch.setExists(true);
+                    nftMatch.setAccountId(entry.getValue());
+                    nftMatch.setKey(key);
+
+                    boolean nftVoteSpotter = storage.getNftVoteSpotter(key);
+                    nftMatch.setSpotterVoteReal(nftVoteSpotter);
+
                     storage.getAccount(entry.getValue())
                             .ifPresent(a -> {
                                 try {
                                     storage.getBlock(a)
-                                            .ifPresent(b -> queryResBuilder
-                                                    .setAccountCode(b.getBlock().getBody().getAccountCode()));
+                                            .ifPresent(b -> nftMatch.setAccountCode(b.getBlock().getBody().getAccountCode()));
+
                                 } catch (RocksDBException e) {
                                     throw new RuntimeException(e);
                                 } catch (InvalidProtocolBufferException e) {
@@ -280,13 +346,72 @@ public class AccountServiceImpl extends AccountServiceImplBase {
             LOGGER.error("Something is wrong!", ex);
         }
 
-        responseObserver.onNext(queryResBuilder.build());
-        responseObserver.onCompleted();
+        return nftMatch;
     }
+
+    private class NftMatch {
+        public boolean exists;
+        public ByteString accountId;
+        public ByteString accountCode;
+        public ByteString key;
+        public boolean spotterVoteReal;
+
+        public NftMatch() {
+            this.exists = false;
+        }
+
+        public void setExists(boolean exists) {
+            this.exists = exists;
+        }
+
+        public void setAccountId(ByteString accountId) {
+            this.accountId = accountId;
+        }
+
+        public void setAccountCode(ByteString accountCode) {
+            this.accountCode = accountCode;
+        }
+
+        public void setKey(ByteString key) {
+            this.key = key;
+        }
+
+        public boolean isExists() {
+            return exists;
+        }
+
+        public ByteString getAccountId() {
+            return accountId;
+        }
+
+        public ByteString getAccountCode() {
+            return accountCode;
+        }
+
+        public ByteString getKey() {
+            return key;
+        }
+
+        public boolean isSpotterVoteReal() {
+            return spotterVoteReal;
+        }
+
+        public void setSpotterVoteReal(boolean spotterVoteReal) {
+            this.spotterVoteReal = spotterVoteReal;
+        }
+    }
+
 
     public static int calculateHammingDistance(ByteString bs1, ByteString bs2) {
         if (bs1.size() != bs2.size()) {
-            throw new IllegalArgumentException("ByteStrings must be of the same length");
+
+//            throw new IllegalArgumentException("ByteStrings must be of the same length");
+            LOGGER.error("ByteString provided: {}, {}", bs1.size(), Base32Helper.encode(bs1.toByteArray()));
+            LOGGER.error("ByteString in DB: {}, {}", bs2.size(), Base32Helper.encode(bs2.toByteArray()));
+
+            LOGGER.error("ByteStrings must be of the same length");
+
+            return Integer.MAX_VALUE;
         }
 
         int distance = 0;
@@ -360,6 +485,5 @@ public class AccountServiceImpl extends AccountServiceImplBase {
         blockService.newBlock(Pair.of(nodeManager.getNodeId(), block));
         messageService.newMessage(BaseProcessor.makeMessage(Any.pack(blockPubBuilder.build())));
     }
-
 
 }

@@ -98,6 +98,19 @@ message QueryRes {
     bool exists = 1;
     bytes accountId = 2;
     bytes accountCode = 3;
+    int32 nftVoteFake = 4;
+    int32 nftVoteReal = 5;
+    bool spotterVoteReal = 6;
+}
+
+message VoteReq {
+    bytes nftCode = 1;
+    bool real = 2;
+}
+
+message VoteRes {
+    int32 nftVoteFake = 1;
+    int32 nftVoteReal = 2;
 }
 
 service AccountService {
@@ -110,4 +123,5 @@ service AccountService {
     rpc listUnclaimedBlocks(ListUnclaimedBlockReq) returns (ListUnclaimedBlockRes);
     rpc receiveInfos(InfoReq) returns (stream InfoRes);
     rpc queryNft(QueryReq) returns (QueryRes);
+    rpc voteNft(VoteReq) returns (VoteRes);
 }

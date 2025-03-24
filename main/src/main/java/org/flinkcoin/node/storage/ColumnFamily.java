@@ -25,7 +25,10 @@ public enum ColumnFamily {
     WEIGHT(7, "weight"),
     NODE(8, "node"),
     NODE_ADDRESS(9, "node_address"),
-    NFT_CODE(10, "nft_code");
+    NFT_CODE(10, "nft_code"),
+    NFT_VOTE_REAL(11, "nft_vote_real"),
+    NFT_VOTE_FAKE(12, "nft_vote_fake"),
+    NFT_VOTE_SPOTTER(13, "nft_vote_spotter");
 
     private final int id;
     private final String name;

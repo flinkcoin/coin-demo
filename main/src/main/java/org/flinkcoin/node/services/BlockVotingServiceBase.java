@@ -19,6 +19,7 @@ import com.google.protobuf.ByteString;
 import io.reactivex.rxjava3.processors.PublishProcessor;
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
+import org.flinkcoin.helper.helpers.Base32Helper;
 import org.flinkcoin.helper.helpers.DateHelper;
 import org.flinkcoin.helper.helpers.UUIDHelper;
 import org.flinkcoin.node.configuration.ProcessorBase;
@@ -61,7 +62,14 @@ public abstract class BlockVotingServiceBase extends ProcessorBase<ByteString> {
             storage.putUnclaimedInfoBlock(t, ByteString.copyFrom(UUIDHelper.asBytes()),
                     prepareInfoBlock(block.getBlock().getBody().getSendAccountId(), UnclaimedInfoBlock.Action.CREATE, block.getBlock().getBlockHash().getHash()));
         } else if (block.getBlock().getBody().getBlockType() == Common.Block.BlockType.ADD_NFT) {
+
+            LOGGER.info("Adding to DB new NFT: {}, {}", block.getBlock().getBody().getNftCode().size(), Base32Helper.encode(block.getBlock().getBody().getNftCode().toByteArray()));
+
             storage.putNftCode(t,block.getBlock().getBody().getNftCode(),block.getBlock().getBody().getAccountId());
+
+            storage.putNftVoteFake(t,block.getBlock().getBody().getNftCode(),0);
+            storage.putNftVoteReal(t,block.getBlock().getBody().getNftCode(),0);
+            storage.putNftVoteSpotter(t,block.getBlock().getBody().getNftCode(),block.getBlock().getBody().getSpotterVoteReal());
         } else if (block.getBlock().getBody().getBlockType() == Common.Block.BlockType.DEL_NFT) {
             storage.deleteNftCode(t,block.getBlock().getBody().getNftCode());
         }

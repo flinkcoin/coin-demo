@@ -18,11 +18,14 @@ package org.flinkcoin.node.storage;
 import com.google.inject.Singleton;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.InvalidProtocolBufferException;
+import inet.ipaddr.HostName;
 import org.flinkcoin.data.proto.common.Common;
 import org.flinkcoin.data.proto.common.Common.FullBlock;
 import org.flinkcoin.data.proto.common.Common.Node;
 import org.flinkcoin.data.proto.storage.UnclaimedInfoBlock;
+import org.flinkcoin.helper.Pair;
 import org.flinkcoin.helper.helpers.ByteHelper;
+import org.flinkcoin.node.voting.NodeVoting;
 import org.rocksdb.ReadOptions;
 import org.rocksdb.RocksDBException;
 import org.rocksdb.RocksIterator;
@@ -30,6 +33,7 @@ import org.rocksdb.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
 import java.util.*;
 
 @Singleton
@@ -119,7 +123,53 @@ public class Storage extends StorageBase {
     public void putNodeAddress(Transaction t, ByteString nodeId, Common.NodeAddress nodeAddress) throws RocksDBException {
         t.put(getHandle(ColumnFamily.NODE_ADDRESS), nodeId.toByteArray(), nodeAddress.toByteArray());
     }
-    
+
+    public void putNftVoteReal(Transaction t, ByteString nftCode, int count) throws RocksDBException {
+        t.put(getHandle(ColumnFamily.NFT_VOTE_REAL), nftCode.toByteArray(), ByteHelper.intToBytes(count));
+    }
+
+    public void putNftVoteFake(Transaction t, ByteString nftCode, int count) throws RocksDBException {
+        t.put(getHandle(ColumnFamily.NFT_VOTE_FAKE), nftCode.toByteArray(), ByteHelper.intToBytes(count));
+    }
+
+    public int getNftVoteReal(Transaction t, ByteString nftCode) throws RocksDBException {
+        byte[] bytes = t.get(getHandle(ColumnFamily.NFT_VOTE_REAL), new ReadOptions(), nftCode.toByteArray());
+        return bytes == null ? 0 : ByteHelper.bytesToInt(bytes, 0);
+    }
+
+    public int getNftVoteFake(Transaction t, ByteString nftCode) throws RocksDBException {
+        byte[] bytes = t.get(getHandle(ColumnFamily.NFT_VOTE_FAKE), new ReadOptions(), nftCode.toByteArray());
+        return bytes == null ? 0 : ByteHelper.bytesToInt(bytes, 0);
+    }
+
+    public int getNftVoteReal(ByteString nftCode) throws RocksDBException {
+        byte[] bytes = get(ColumnFamily.NFT_VOTE_REAL, nftCode);
+        return bytes == null ? 0 : ByteHelper.bytesToInt(bytes, 0);
+    }
+
+    public int getNftVoteFake(ByteString nftCode) throws RocksDBException {
+        byte[] bytes = get(ColumnFamily.NFT_VOTE_FAKE, nftCode);
+        return bytes == null ? 0 : ByteHelper.bytesToInt(bytes, 0);
+    }
+
+    public void vote(ByteString nftCode, boolean isReal) {
+        try {
+            newTransaction(t -> {
+                if (isReal) {
+                    int nftVoteReal = getNftVoteReal(t, nftCode);
+                    nftVoteReal++;
+                    putNftVoteReal(t, nftCode, nftVoteReal);
+                } else {
+                    int nftVoteFake = getNftVoteFake(t, nftCode);
+                    nftVoteFake++;
+                    putNftVoteFake(t, nftCode, nftVoteFake);
+                }
+            });
+        } catch (RocksDBException ex) {
+            LOGGER.error("Could not write vote result to DB", ex);
+        }
+    }
+
     public void putNftCode(Transaction t, ByteString nftCode, ByteString accountId) throws RocksDBException {
         t.put(getHandle(ColumnFamily.NFT_CODE), nftCode.toByteArray(), accountId.toByteArray());
     }
@@ -140,17 +190,32 @@ public class Storage extends StorageBase {
         return nftList;
     }
 
-    public Optional<ByteString> getAccount( ByteString accountId) throws RocksDBException {
-         byte[] bytes = get(ColumnFamily.ACCOUNT, accountId);
+    public Optional<ByteString> getAccount(ByteString accountId) throws RocksDBException {
+        byte[] bytes = get(ColumnFamily.ACCOUNT, accountId);
 
-         return bytes == null ? Optional.empty() : Optional.of(ByteString.copyFrom(bytes));
+        return bytes == null ? Optional.empty() : Optional.of(ByteString.copyFrom(bytes));
     }
 
-    public Optional<FullBlock> getBlock( ByteString blockHash) throws RocksDBException, InvalidProtocolBufferException {
+
+    public Optional<FullBlock> getBlock(ByteString blockHash) throws RocksDBException, InvalidProtocolBufferException {
         byte[] bytes = get(ColumnFamily.BLOCK, blockHash);
         if (bytes == null) {
             return Optional.empty();
         }
         return Optional.of(FullBlock.parseFrom(bytes));
     }
+
+    public void putNftVoteSpotter(Transaction t, ByteString nftCode, boolean vote) throws RocksDBException {
+        int votex = vote ? 1 : 0;
+        t.put(getHandle(ColumnFamily.NFT_VOTE_SPOTTER), nftCode.toByteArray(), ByteHelper.intToBytes(votex));
+    }
+
+    public boolean getNftVoteSpotter(ByteString nftCode) throws RocksDBException {
+        byte[] bytes = get(ColumnFamily.NFT_VOTE_SPOTTER, nftCode);
+        if (bytes == null) {
+            return false;
+        }
+        return ByteHelper.bytesToInt(bytes, 0) == 1;
+    }
+
 }
