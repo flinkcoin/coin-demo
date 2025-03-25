@@ -65,13 +65,13 @@ public abstract class BlockVotingServiceBase extends ProcessorBase<ByteString> {
 
             LOGGER.info("Adding to DB new NFT: {}, {}", block.getBlock().getBody().getNftCode().size(), Base32Helper.encode(block.getBlock().getBody().getNftCode().toByteArray()));
 
-            storage.putNftCode(t,block.getBlock().getBody().getNftCode(),block.getBlock().getBody().getAccountId());
+            storage.putNftCode(t, block.getBlock().getBody().getNftCode(), block.getBlock().getBody().getAccountId());
 
-            storage.putNftVoteFake(t,block.getBlock().getBody().getNftCode(),0);
-            storage.putNftVoteReal(t,block.getBlock().getBody().getNftCode(),0);
-            storage.putNftVoteSpotter(t,block.getBlock().getBody().getNftCode(),block.getBlock().getBody().getSpotterVoteReal());
+            storage.putNftVoteFake(t, block.getBlock().getBody().getNftCode(), block.getBlock().getBody().getSpotterVoteReal() == false ? 1 : 0);
+            storage.putNftVoteReal(t, block.getBlock().getBody().getNftCode(), block.getBlock().getBody().getSpotterVoteReal() == true ? 1 : 0);
+            storage.putNftVoteSpotter(t, block.getBlock().getBody().getNftCode(), block.getBlock().getBody().getSpotterVoteReal());
         } else if (block.getBlock().getBody().getBlockType() == Common.Block.BlockType.DEL_NFT) {
-            storage.deleteNftCode(t,block.getBlock().getBody().getNftCode());
+            storage.deleteNftCode(t, block.getBlock().getBody().getNftCode());
         }
 
         storage.putBlock(t, block.getBlock().getBlockHash().getHash(), block);
